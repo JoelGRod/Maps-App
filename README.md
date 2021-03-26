@@ -1,4 +1,8 @@
-# MapsApp
+# Maps App
+
+Application that uses the mapbox api using it in different ways
+
+Based on the projects by Fernando Herrera - https://www.udemy.com/course/angular-fernando-herrera/
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.1.
 
