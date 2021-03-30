@@ -1,1 +1,13 @@
-<p>markers works!</p>
+<ul class="list-group add-button">
+    <li class="list-group-item list-group-item-info"
+        (click)="add_marker()">
+        + Add
+    </li>
+
+    <li class="list-group-item"
+        (click)="go_marker()">
+        Marker
+    </li>
+</ul>
+
+<div #map class="map-container"></div>
