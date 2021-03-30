@@ -1,0 +1,14 @@
+<div #map class="map-container"></div>
+
+<div class="row zoom-container">
+    <div class="col-12">
+        <label class="form-label">
+            Zoom: 17 - Long,Lat: [123, 345]
+        </label>
+        <input type="range" class="form-range">
+    </div>
+    <div class="col-12">
+        <button class="btn btn-primary px-4" (click)="zoom_out()">-</button>
+        <button class="btn btn-primary px-4 float-end" (click)="zoom_in()">+</button>
+    </div>
+</div>
