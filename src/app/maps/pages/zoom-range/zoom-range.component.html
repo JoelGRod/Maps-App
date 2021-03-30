@@ -3,9 +3,15 @@
 <div class="row zoom-container">
     <div class="col-12">
         <label class="form-label">
-            Zoom: 17 - Long,Lat: [123, 345]
+            Zoom: {{ zoom_value | number : '2.0-2' }} - Long,Lat: [{{center[0] | number : '2.0-4'}}, {{center[1] | number : '2.0-4'}}]
         </label>
-        <input type="range" class="form-range">
+        <input type="range" 
+                class="form-range"
+                [value]="zoom_value"
+                min="1"
+                max="18"
+                (input)="zoom_range(zoomrange.value)"
+                #zoomrange>
     </div>
     <div class="col-12">
         <button class="btn btn-primary px-4" (click)="zoom_out()">-</button>
