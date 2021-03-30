@@ -1,5 +1,10 @@
-import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
+
+interface BaseMarker {
+  marker: mapboxgl.Marker;
+  color: string;
+}
 
 @Component({
   selector: 'app-markers',
@@ -22,14 +27,21 @@ import * as mapboxgl from 'mapbox-gl';
     `
   ]
 })
-export class MarkersComponent implements AfterViewInit {
+export class MarkersComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('map') map_container!: ElementRef;
   map!: mapboxgl.Map;
   zoom_value: number = 15;
   center: [number, number] = [-16.255817753566934, 28.467701536382535];
+  // Markers
+  markers: BaseMarker[] = [];
   
   constructor() { }
+
+  // Clean listeners (rule of thumb)
+  ngOnDestroy(): void {
+    this.map.off('zoomend', () => {});
+  }
   
   ngAfterViewInit(): void {
     this.map = new mapboxgl.Map({
@@ -69,10 +81,28 @@ export class MarkersComponent implements AfterViewInit {
     })
       .setLngLat(this.center)
       .addTo(this.map);
+    
+    
+    this.markers.push({
+      marker: newMarker,
+      color: color
+    });
   }
 
-  go_marker(): void {
+  go_marker(marker: mapboxgl.Marker): void {
+    this.map.flyTo({
+      center: marker.getLngLat()
+    });
+  }
 
+  // Optimal: save in backend but for this 
+  // example we put markers on local storage
+  save_markers_local_storage(): void {
+
+  }
+
+  read_local_storage(): void {
+    
   }
 
 }
